@@ -4,7 +4,7 @@ import yaml
 import argparse
 
 def run(file_name, input_data=""):
-    process = subprocess.run(['python3', file_name], input=input_data, text=True)
+    process = subprocess.run(['python3', file_name], input=input_data, text=True, capture_output=True)
     return process.stdout
 
 def generate_testcase(inputter_file_name, outputter_file_name):
@@ -18,24 +18,25 @@ def generate_batch(config, inputter_file_name, outputter_file_name):
     num_testcases = config['testcase']['num']
     points = config['points']
 
-    batch_dir = "testcase/{0}".format(name)
+    batch_dir = "testcases/{0}".format(name)
     os.mkdir(batch_dir)
     manifest = {'type': 'batch', 'name': name, 'metadata': {'points': points}}
     with open("{0}/manifest.yaml".format(batch_dir), "w") as manifest_file:
         yaml.dump(manifest, manifest_file)
     for testcase_num in range(num_testcases):
-        input_data, output_data = generate_testcase()
-        testcase_name = testcase_name.format(testcase_num+1)
-        with open("{0}/{1}/{1}.in", "w").format(testcase_name) as testcase_input_file:
+        input_data, output_data = generate_testcase(inputter_file_name, outputter_file_name)
+        testcase_name = testcases_name.format(testcase_num+1)
+        os.mkdir("{0}/{1}".format(batch_dir, testcase_name))
+        with open("{0}/{1}/{1}.in".format(batch_dir, testcase_name), "w") as testcase_input_file:
             testcase_input_file.write(input_data)
-        with open("{0}/{1}/{1}.out", "w").format(testcase_name) as testcase_output_file:
+        with open("{0}/{1}/{1}.out".format(batch_dir, testcase_name), "w") as testcase_output_file:
             testcase_output_file.write(output_data)
 
 def main(config):
-    os.mkdir("testcases")
     inputter_file_name = config['generator']['input']
     outputter_file_name = config['generator']['output']
     batches = config['testcase']['batch']
+    os.mkdir("testcases")
     for batch in batches:
         generate_batch(batch, inputter_file_name, outputter_file_name)
 
