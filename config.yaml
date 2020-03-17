@@ -1,0 +1,16 @@
+version: v1
+generator:
+  input: generator.py # filename of the input generator
+  output: solution.py # file name of the solution
+testcase:
+  batch:
+  - name: batch1 # batch name
+    points: 100 # points
+    testcase:
+      name: t{0} # testcase name, "{0}" is replaced with the testcase number
+      num: 10 # number of testcases
+  - name: example
+    points: 0
+    testcase:
+      name: sample
+      num: 1
