@@ -2,6 +2,7 @@ import subprocess
 import os
 import yaml
 import argparse
+import math
 
 def run(file_name, input_data=""):
     process = subprocess.run(['python3', file_name], input=input_data, text=True, capture_output=True)
@@ -17,6 +18,7 @@ def generate_batch(config, inputter_file_name, outputter_file_name):
     testcases_name = config['testcase']['name']
     num_testcases = config['testcase']['num']
     points = config['points']
+    testcase_num_digits = int(math.log10(num_testcases))+1
 
     batch_dir = "testcases/{0}".format(name)
     os.mkdir(batch_dir)
@@ -25,7 +27,7 @@ def generate_batch(config, inputter_file_name, outputter_file_name):
         yaml.dump(manifest, manifest_file)
     for testcase_num in range(num_testcases):
         input_data, output_data = generate_testcase(inputter_file_name, outputter_file_name)
-        testcase_name = testcases_name.format(testcase_num+1)
+        testcase_name = testcases_name.format(str(testcase_num+1).zfill(testcase_num_digits))
         os.mkdir("{0}/{1}".format(batch_dir, testcase_name))
         with open("{0}/{1}/{1}.in".format(batch_dir, testcase_name), "w") as testcase_input_file:
             testcase_input_file.write(input_data)
