@@ -1,7 +1,7 @@
 version: v1
 generator:
   input: ["python3", "generator.py"] # command to execute the input generator
-  output: solution.py # command to execute the solution
+  output: ["python3", "solution.py"] # command to execute the solution
 testcase:
   batch:
   - name: batch1 # batch name
