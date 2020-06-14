@@ -48,6 +48,6 @@ pnoj-tg config.yaml
 ## Build Instructions
 ```bash
 git clone https://github.com/pnoj/pnoj-tg.git # clones the repository
-cd scrapec
+cd pnoj-tg
 pip install . # install pnoj-tg
 ```
