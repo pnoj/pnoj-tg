@@ -1,16 +1,16 @@
 # pnoj-tg
 
-This is a testcase generator for the PNOJ Online Judge.
+This is a testcase generator for the [PNOJ Online Judge](https://oj.paullee.dev/).
 
-It is recommended to install pnoj-tg using the PIP package available on PYPI.
+It is recommended to install pnoj-tg using the PIP package available on [PYPI](https://pypi.org/project/pnoj-tg/).
 
-# Installation
+## Installation
 
 ```bash
 pip install pnoj-tg
 ```
 
-# Usage
+## Usage
 
 First create a file named `config.yaml`. Change the content to suit your needs.
 
@@ -35,7 +35,9 @@ testcase:
 ```
 
 Then create two programs `generator.py` and `solution.py`.
+
 `generator.py` should generate a random case.
+
 `solution.py` should be the reference solution to the problem you are creating testdata for.
 
 Then run:
