@@ -1,2 +1,5 @@
 generator.py
 solution.py
+build/**
+dist/**
+pnoj_tg.egg-info/**
